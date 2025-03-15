@@ -1,14 +1,54 @@
-from app import db
-
-class Producto(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100), nullable=False)
-    precio = db.Column(db.Float, nullable=False)
-    descripcion = db.Column(db.String(255), nullable=True)
-    imagen_url = db.Column(db.String(255), nullable=True)  # URL de la imagen
-
-    def __init__(self, nombre, precio, descripcion, imagen_url):
+class Heladeria:
+    """Clase Heladería que maneja la lista de productos e ingredientes"""
+    
+    def __init__(self, nombre):
         self.nombre = nombre
-        self.precio = precio
-        self.descripcion = descripcion
-        self.imagen_url = imagen_url
+        self.productos = []
+        self.ingredientes = []
+    
+    def cargar_ingredientes_desde_db(self):
+        """Carga todos los ingredientes desde la base de datos al modelo"""
+        self.ingredientes = Ingrediente.query.all()
+
+    def cargar_productos_desde_db(self):
+        """Carga todos los productos desde la base de datos al modelo"""
+        self.productos = Producto.query.all()
+
+    def agregar_producto(self, producto):
+        self.productos.append(producto)
+
+    def agregar_ingrediente(self, ingrediente):
+        self.ingredientes.append(ingrediente)
+
+    def listar_productos(self):
+        return [p.nombre for p in self.productos]
+
+    def listar_ingredientes(self):
+        return [i.nombre for i in self.ingredientes]
+class Heladeria:
+    """Clase Heladería que maneja la lista de productos e ingredientes"""
+    
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.productos = []
+        self.ingredientes = []
+    
+    def cargar_ingredientes_desde_db(self):
+        """Carga todos los ingredientes desde la base de datos al modelo"""
+        self.ingredientes = Ingrediente.query.all()
+
+    def cargar_productos_desde_db(self):
+        """Carga todos los productos desde la base de datos al modelo"""
+        self.productos = Producto.query.all()
+
+    def agregar_producto(self, producto):
+        self.productos.append(producto)
+
+    def agregar_ingrediente(self, ingrediente):
+        self.ingredientes.append(ingrediente)
+
+    def listar_productos(self):
+        return [p.nombre for p in self.productos]
+
+    def listar_ingredientes(self):
+        return [i.nombre for i in self.ingredientes]
